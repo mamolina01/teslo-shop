@@ -77,7 +77,7 @@ const CheckoutPage = () => {
               <p className="mb-5">
                 {/* Disclaimer */}
                 <span className="text-xs">
-                  Al hacer clic en "Colocar orden", aceptas nuestros{' '}
+                  Al hacer clic en {'"'}Colocar orden{'"'}, aceptas nuestros{' '}
                   <a href="#" className="underline">
                     términos y condiciones
                   </a>{' '}
