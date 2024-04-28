@@ -1,7 +1,14 @@
 export const revalidate = 604800
 
 import { getProductByslug } from '@/actions'
-import { ProductMobileSlideshow, ProductSlideshow, QuantitySelector, SizeSelector, StockLabel } from '@/components'
+import {
+  AddToCart,
+  ProductMobileSlideshow,
+  ProductSlideshow,
+  QuantitySelector,
+  SizeSelector,
+  StockLabel
+} from '@/components'
 import { titleFont } from '@/config/fonts'
 import { initialData } from '@/seed/seed'
 import { Metadata, ResolvingMetadata } from 'next'
@@ -58,14 +65,7 @@ const ProductPage = async ({ params }: Props) => {
         <h1 className={`${titleFont.className} antialiased font-bold text-xl`}>{product.title}</h1>
         <p className="text-lg mb-5">${product.price}</p>
 
-        {/* size selector */}
-        <SizeSelector selectedSize={product.sizes[0]} availableSizes={product.sizes} />
-
-        {/* quantity selector */}
-        <QuantitySelector quantity={2} />
-
-        {/* Button */}
-        <button className="btn-primary my-5">Agregar al carrito</button>
+        <AddToCart product={product} />
 
         {/* Description */}
         <h3 className="font-bold text-sm">Descripcion</h3>
