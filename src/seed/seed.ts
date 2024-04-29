@@ -1,4 +1,3 @@
-import { Category } from '../interfaces/product.interface'
 interface SeedProduct {
   description: string
   images: string[]
@@ -12,7 +11,7 @@ interface SeedProduct {
   gender: 'men' | 'women' | 'kid' | 'unisex'
 }
 
-type ValidSizes = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL' | 'XXXXL'
+type ValidSizes = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL'
 type ValidTypes = 'shirts' | 'pants' | 'hoodies' | 'hats'
 
 interface SeedData {
@@ -21,7 +20,7 @@ interface SeedData {
 }
 
 export const initialData: SeedData = {
-  categories: ['shirts', 'pants', 'hoodies', 'hats'],
+  categories: ['Shirts', 'Pants', 'Hoodies', 'Hats'],
   products: [
     {
       description:
