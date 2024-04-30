@@ -20,7 +20,6 @@ export const authConfig: NextAuthConfig = {
 
         const { email, password } = parsedCredentials.data
 
-        console.log(prisma)
         // Buscar el correo
         const user = await prisma.user.findUnique({ where: { email: email.toLowerCase() } })
         if (!user) return null

@@ -1,4 +1,5 @@
 'use client'
+import { logout } from '@/actions'
 import { useUiStore } from '@/store'
 import clsx from 'clsx'
 import Link from 'next/link'
@@ -17,9 +18,10 @@ export const Sidebar = () => {
   const options = {
     firstPart: [
       {
-        route: '/',
+        route: '/profile',
         icon: <IoPersonOutline size={20} />,
-        title: 'Perfil'
+        title: 'Perfil',
+        function: () => closeSideMenu()
       },
       {
         route: '/',
@@ -27,14 +29,15 @@ export const Sidebar = () => {
         title: 'Ordenes'
       },
       {
-        route: '/',
+        route: '/auth/login',
         icon: <IoLogInOutline size={20} />,
         title: 'Ingresar'
       },
       {
         route: '/',
         icon: <IoLogOutOutline size={20} />,
-        title: 'Salida'
+        title: 'Salir',
+        function: () => logout()
       }
     ],
     secondPart: [
@@ -99,6 +102,7 @@ export const Sidebar = () => {
           <Link
             key={option.title}
             href={option.route}
+            onClick={option.function}
             className="flex items-center mt-4 p-2 hover:bg-gray-100 rounded transition-all"
           >
             {option.icon}

@@ -2,12 +2,19 @@
 
 import { authenticate } from '@/actions'
 import Link from 'next/link'
-import { useFormState } from 'react-dom'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
+import { useFormState, useFormStatus } from 'react-dom'
+import { IoInformationOutline } from 'react-icons/io5'
 
 export const LoginForm = () => {
   const [state, dispatch] = useFormState(authenticate, undefined)
-
-  console.log({ state })
+  const router = useRouter()
+  useEffect(() => {
+    if (state === 'success') {
+      router.replace('/')
+    }
+  }, [state])
 
   return (
     <form action={dispatch} className="flex flex-col">
@@ -17,9 +24,16 @@ export const LoginForm = () => {
       <label htmlFor="email">Contraseña</label>
       <input className="px-5 py-2 border bg-gray-200 rounded mb-5" type="password" name="password" />
 
-      <button type="submit" className="btn-primary">
-        Ingresar
-      </button>
+      <div className="flex h-8 items-end space-x-1" aria-live="polite" aria-atomic="true">
+        {state === 'CredentialsSignin' && (
+          <div className="flex mb-2">
+            <IoInformationOutline className="h-5 w-5 text-red-500" />
+            <p className="text-sm text-red-500">Credenciales invalidas</p>
+          </div>
+        )}
+      </div>
+
+      <LoginButton />
 
       {/* divisor l ine */}
       <div className="flex items-center my-5">
@@ -32,5 +46,15 @@ export const LoginForm = () => {
         Crear una nueva cuenta
       </Link>
     </form>
+  )
+}
+
+const LoginButton = () => {
+  const { pending } = useFormStatus()
+
+  return (
+    <button type="submit" className="btn-primary" disabled={pending}>
+      Ingresar
+    </button>
   )
 }
