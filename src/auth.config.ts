@@ -9,6 +9,23 @@ export const authConfig: NextAuthConfig = {
   pages: {
     signIn: '/login'
   },
+  callbacks: {
+    authorized({ auth, request: { nextUrl } }) {
+      console.log({ auth })
+
+      return true
+    },
+    jwt({ token, user }) {
+      if (user) {
+        token.data = user
+      }
+      return token
+    },
+    session({ session, token, user }) {
+      session.user = token.data as any
+      return session
+    }
+  },
   providers: [
     Credentials({
       async authorize(credentials) {
@@ -36,4 +53,4 @@ export const authConfig: NextAuthConfig = {
   ]
 }
 
-export const { signIn, signOut, auth } = NextAuth(authConfig)
+export const { signIn, signOut, auth, handlers } = NextAuth(authConfig)

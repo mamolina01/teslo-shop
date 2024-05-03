@@ -2,17 +2,16 @@
 
 import { authenticate } from '@/actions'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { useFormState, useFormStatus } from 'react-dom'
 import { IoInformationOutline } from 'react-icons/io5'
 
 export const LoginForm = () => {
   const [state, dispatch] = useFormState(authenticate, undefined)
-  const router = useRouter()
+
   useEffect(() => {
     if (state === 'success') {
-      router.replace('/')
+      window.location.replace('/')
     }
   }, [state])
 
