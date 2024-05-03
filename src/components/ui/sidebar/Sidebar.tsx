@@ -1,6 +1,8 @@
 'use client'
+import { logout } from '@/actions'
 import { useUiStore } from '@/store'
 import clsx from 'clsx'
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import {
   IoCloseOutline,
@@ -14,29 +16,39 @@ import {
 } from 'react-icons/io5'
 
 export const Sidebar = () => {
+  const { data: session } = useSession()
+
+  const isAuthenticated = !!session?.user
+  const isAdmin = session?.user.role === 'admin'
+
   const options = {
-    firstPart: [
-      {
-        route: '/',
-        icon: <IoPersonOutline size={20} />,
-        title: 'Perfil'
-      },
-      {
-        route: '/',
-        icon: <IoTicketOutline size={20} />,
-        title: 'Ordenes'
-      },
-      {
-        route: '/',
-        icon: <IoLogInOutline size={20} />,
-        title: 'Ingresar'
-      },
-      {
-        route: '/',
-        icon: <IoLogOutOutline size={20} />,
-        title: 'Salida'
-      }
-    ],
+    firstPart: isAuthenticated
+      ? [
+          {
+            route: '/profile',
+            icon: <IoPersonOutline size={20} />,
+            title: 'Perfil',
+            function: () => closeSideMenu()
+          },
+          {
+            route: '/',
+            icon: <IoTicketOutline size={20} />,
+            title: 'Ordenes'
+          },
+          {
+            route: '/',
+            icon: <IoLogOutOutline size={20} />,
+            title: 'Salir',
+            function: () => logout()
+          }
+        ]
+      : [
+          {
+            route: '/auth/login',
+            icon: <IoLogInOutline size={20} />,
+            title: 'Ingresar'
+          }
+        ],
     secondPart: [
       {
         route: '/',
@@ -99,6 +111,7 @@ export const Sidebar = () => {
           <Link
             key={option.title}
             href={option.route}
+            onClick={option.function}
             className="flex items-center mt-4 p-2 hover:bg-gray-100 rounded transition-all"
           >
             {option.icon}
@@ -108,16 +121,17 @@ export const Sidebar = () => {
 
         <div className="w-full h-px bg-gray-200 my-5" />
 
-        {options.secondPart.map(option => (
-          <Link
-            key={option.title}
-            href={option.route}
-            className="flex items-center mt-4 p-2 hover:bg-gray-100 rounded transition-all"
-          >
-            {option.icon}
-            <span className="text-lg ml-3">{option.title}</span>
-          </Link>
-        ))}
+        {isAdmin &&
+          options.secondPart.map(option => (
+            <Link
+              key={option.title}
+              href={option.route}
+              className="flex items-center mt-4 p-2 hover:bg-gray-100 rounded transition-all"
+            >
+              {option.icon}
+              <span className="text-lg ml-3">{option.title}</span>
+            </Link>
+          ))}
       </nav>
     </div>
   )
