@@ -21,3 +21,5 @@ export * from './ui/pagination/Pagination'
 export * from './provider/Provider'
 
 export * from './auth/RegisterForm'
+
+export * from './checkout/addressForm/AddressForm'
