@@ -22,4 +22,8 @@ export * from './provider/Provider'
 
 export * from './auth/RegisterForm'
 
-export * from './checkout/addressForm/AddressForm'
+export * from './checkout/address-form/AddressForm'
+export * from './checkout/products-in-cart-checkout/ProductsInCartCheckout'
+export * from './checkout/place-order/PlaceOrder'
+
+export * from './orders/isPaidButton/IsPaidButton'
