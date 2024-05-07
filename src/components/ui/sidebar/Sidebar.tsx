@@ -24,31 +24,32 @@ export const Sidebar = () => {
   const options = {
     firstPart: isAuthenticated
       ? [
-          {
-            route: '/profile',
-            icon: <IoPersonOutline size={20} />,
-            title: 'Perfil',
-            function: () => closeSideMenu()
-          },
-          {
-            route: '/',
-            icon: <IoTicketOutline size={20} />,
-            title: 'Ordenes'
-          },
-          {
-            route: '/',
-            icon: <IoLogOutOutline size={20} />,
-            title: 'Salir',
-            function: () => logout()
-          }
-        ]
+        {
+          route: '/profile',
+          icon: <IoPersonOutline size={20} />,
+          title: 'Perfil',
+          function: () => closeSideMenu()
+        },
+        {
+          route: '/orders',
+          icon: <IoTicketOutline size={20} />,
+          title: 'Ordenes',
+          function: () => closeSideMenu()
+        },
+        {
+          route: '/',
+          icon: <IoLogOutOutline size={20} />,
+          title: 'Salir',
+          function: () => logout()
+        }
+      ]
       : [
-          {
-            route: '/auth/login',
-            icon: <IoLogInOutline size={20} />,
-            title: 'Ingresar'
-          }
-        ],
+        {
+          route: '/auth/login',
+          icon: <IoLogInOutline size={20} />,
+          title: 'Ingresar'
+        }
+      ],
     secondPart: [
       {
         route: '/',
