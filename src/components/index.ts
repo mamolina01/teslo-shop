@@ -18,7 +18,7 @@ export * from './ui/top-menu/TopMenu'
 export * from './ui/footer/Footer'
 export * from './ui/pagination/Pagination'
 
-export * from './provider/Provider'
+export * from './providers/Providers'
 
 export * from './auth/RegisterForm'
 
@@ -26,4 +26,6 @@ export * from './checkout/address-form/AddressForm'
 export * from './checkout/products-in-cart-checkout/ProductsInCartCheckout'
 export * from './checkout/place-order/PlaceOrder'
 
-export * from './orders/isPaidButton/IsPaidButton'
+export * from './orders/orderStatus/OrderStatus'
+
+export * from './paypal/PayPalButton'
