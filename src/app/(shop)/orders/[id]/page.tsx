@@ -1,6 +1,5 @@
-import { IsPaidButton, Title } from '@/components'
+import { OrderStatus, PayPalButton, Title } from '@/components'
 import React from 'react'
-import { initialData } from '@/seed/seed'
 import Image from 'next/image'
 import { getOrderById } from '@/actions/order/get-order-by-id'
 import { redirect } from 'next/navigation'
@@ -30,7 +29,7 @@ const CheckoutPage = async ({ params }: Props) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
           {/* Cart */}
           <div className="flex flex-col mt-5">
-            <IsPaidButton isPaid={order!.isPaid} />
+            <OrderStatus isPaid={order?.isPaid ?? false} />
 
             {order!.OrderItem.map(item => (
               <div className="flex" key={`${item.product.slug} - ${item.size}`}>
@@ -85,7 +84,13 @@ const CheckoutPage = async ({ params }: Props) => {
             </div>
 
             <div className="mt-5 mb-2 w-full">
-              <IsPaidButton isPaid={order!.isPaid} />
+              {
+                order?.isPaid ? (
+                  <OrderStatus isPaid={order?.isPaid ?? false} />
+                ) : (
+                  <PayPalButton amount={order!.total} orderId={order!.id} />
+                )
+              }
             </div>
           </div>
         </div>
