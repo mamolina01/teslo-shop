@@ -52,19 +52,22 @@ export const Sidebar = () => {
       ],
     secondPart: [
       {
-        route: '/',
+        route: '/admin/products',
         icon: <IoShirtOutline size={20} />,
-        title: 'Productos'
+        title: 'Productos',
+        function: () => closeSideMenu()
       },
       {
-        route: '/',
+        route: '/admin/orders',
         icon: <IoTicketOutline size={20} />,
-        title: 'Ordenes'
+        title: 'Ordenes',
+        function: () => closeSideMenu()
       },
       {
-        route: '/',
+        route: '/admin/users',
         icon: <IoPeopleOutline size={20} />,
-        title: 'Usuarios'
+        title: 'Usuarios',
+        function: () => closeSideMenu()
       }
     ]
   }
@@ -127,6 +130,7 @@ export const Sidebar = () => {
             <Link
               key={option.title}
               href={option.route}
+              onClick={option.function}
               className="flex items-center mt-4 p-2 hover:bg-gray-100 rounded transition-all"
             >
               {option.icon}
