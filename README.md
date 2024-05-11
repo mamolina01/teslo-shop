@@ -9,3 +9,7 @@
 5. Run prisma migrations `npx prisma migrate dev`
 6. Ejecutar seed `yarn seed`
 7. Run the project `yarn dev`
+
+#### Admin Credentials
+
+`EMAIL`: admin@mail.com `PASSWORD`: 123456
