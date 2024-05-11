@@ -33,7 +33,7 @@ export const AddressForm = ({ countries, userStoredAddress = {} }: Props) => {
     reset
   } = useForm<FormProps>({
     defaultValues: {
-      ...(userStoredAddress),
+      ...userStoredAddress,
       rememberAddress: false
     }
   })
@@ -46,7 +46,7 @@ export const AddressForm = ({ countries, userStoredAddress = {} }: Props) => {
     if (address.firstName) {
       reset(address)
     }
-  }, [])
+  }, [address, reset])
 
   const onSubmit = async (data: FormProps) => {
     const { rememberAddress, ...AddressForm } = data
