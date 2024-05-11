@@ -12,7 +12,6 @@ const ProductPage = async ({ params }: Props) => {
 
   const [product, categories] = await Promise.all([getProductByslug(slug), getCategories()])
 
-  // Todo: new
   if (!product && slug !== 'new') {
     redirect('/admin/products')
   }

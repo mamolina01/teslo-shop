@@ -24,9 +24,7 @@ export const paypalCheckPayment = async (paypalTransactionId: string) => {
   }
 
   const { status, purchase_units } = resp
-  console.log({ status, purchase_units })
-  const { invoice_id: orderId } = purchase_units[0] // TODO: invoice ID
-
+  const { invoice_id: orderId } = purchase_units[0] 
   if (status !== 'COMPLETED') {
     return {
       ok: false,
@@ -34,7 +32,6 @@ export const paypalCheckPayment = async (paypalTransactionId: string) => {
     }
   }
 
-  // TODO: Realizar la actualización en nuestra base de datos
   try {
     await prisma.order.update({
       where: { id: orderId },
@@ -44,7 +41,6 @@ export const paypalCheckPayment = async (paypalTransactionId: string) => {
       }
     })
 
-    // TODO: Revalidar un path
     revalidatePath(`/orders/${orderId}`)
 
     return {
@@ -110,7 +106,6 @@ const verifyPayPalPayment = async (
       ...requestOptions,
       cache: 'no-store'
     }).then(r => r.json())
-    console.log({ resp })
     return resp
   } catch (error) {
     console.log(error)

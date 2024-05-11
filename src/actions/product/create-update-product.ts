@@ -31,7 +31,6 @@ export const createUpdateProduct = async (formData: FormData) => {
   const productParsed = productSchema.safeParse(data)
 
   if (!productParsed.success) {
-    console.log(productParsed.error)
     return { ok: false }
   }
 
@@ -96,7 +95,6 @@ export const createUpdateProduct = async (formData: FormData) => {
       }
     })
 
-    // Todo: RevalidatePaths
     revalidatePath('/admin/products')
     revalidatePath(`/admin/product/${product.slug}`)
     revalidatePath(`/products/${product.slug}`)
