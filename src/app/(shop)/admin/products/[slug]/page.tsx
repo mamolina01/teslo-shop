@@ -7,7 +7,7 @@ interface Props {
     slug: string
   }
 }
-export const ProductPage = async ({ params }: Props) => {
+const ProductPage = async ({ params }: Props) => {
   const { slug } = params
 
   const [product, categories] = await Promise.all([getProductByslug(slug), getCategories()])

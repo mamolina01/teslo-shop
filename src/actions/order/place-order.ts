@@ -105,10 +105,17 @@ export const placeOrder = async (productIds: ProductToOrder[], address: Address)
         }
       })
 
-      const { country, rememberAddress, ...restAddress } = address
+      // eslint-disable-next-line
+      const { country, ...restAddress } = address
       const orderAddress = await tx.orderAddress.create({
         data: {
-          ...restAddress,
+          firstName: restAddress.firstName,
+          lastName: restAddress.lastName,
+          address: restAddress.address,
+          address2: restAddress.address2,
+          postalCode: restAddress.postalCode,
+          city: restAddress.city,
+          phone: restAddress.phone,
           countryId: country,
           orderId: order.id
         }
