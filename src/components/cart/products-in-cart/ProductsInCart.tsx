@@ -1,42 +1,46 @@
 'use client'
-import { QuantitySelector } from '@/components'
+import { ProductImage, QuantitySelector } from '@/components'
 import { useCartStore } from '@/store'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 export const ProductsInCart = () => {
-  const { updateProductQuantity, removeProduct } = useCartStore(state => state)
-  const productsInCart = useCartStore(state => state.cart)
+  const updateProductQuantity = useCartStore(state => state.updateProductQuantity)
+  const removeProduct = useCartStore(state => state.removeProduct)
+
   const [loaded, setLoaded] = useState(false)
+  const productsInCart = useCartStore(state => state.cart)
+
   useEffect(() => {
     setLoaded(true)
-  }, [])
+  })
 
   if (!loaded) {
     return <p>Loading...</p>
   }
 
-  const updateQuantity = () => {}
-
   return (
     <>
       {productsInCart.map(product => (
-        <div className="flex mb-5" key={`${product.slug}-${product.size}`}>
-          <Image
-            src={`/products/${product.image}`}
-            width={120}
-            height={120}
+        <div key={`${product.slug}-${product.size}`} className="flex mb-5">
+          <ProductImage
+            src={product.image}
+            width={100}
+            height={100}
+            style={{
+              width: '100px',
+              height: '100px'
+            }}
             alt={product.title}
-            className="mr-5 rounded w-[110px] h-[110px]"
+            className="mr-5 rounded"
           />
 
           <div>
-            <Link href={`/product/${product.slug}`}>
-              <p className="font-semibold hover:underline">
-                {product.size} - {product.title}
-              </p>
+            <Link className="hover:underline cursor-pointer" href={`/product/${product.slug} `}>
+              {product.size} - {product.title}
             </Link>
+
             <p>${product.price}</p>
             <QuantitySelector
               quantity={product.quantity}
